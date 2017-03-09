@@ -7,9 +7,12 @@ import { Recipe } from '../recipe';
   templateUrl: './recipe-list.component.html'
 })
 export class RecipeListComponent implements OnInit {
- recipes: Recipe[] = [];
+ recipes: Recipe[] = [
+    new Recipe('Schnitzel', 'Very tasty', 'http://ohmyveggies.com/wp-content/uploads/2013/06/the_perfect_summer_salad.jpg', []),
+    new Recipe('Summer Salad', 'Okayish', 'http://ohmyveggies.com/wp-content/uploads/2013/06/the_perfect_summer_salad.jpg', [])
+  ];
+
  @Output() recipeSelected = new EventEmitter<Recipe>();
- recipe = new Recipe('Dummy', 'Dummy', 'https://thumb1.shutterstock.com/display_pic_with_logo/3612503/408291268/stock-vector-tailor-dummy-fashion-icon-on-white-background-atelier-object-simple-and-minimalistic-couture-408291268.jpg');
 
   constructor() { }
 
