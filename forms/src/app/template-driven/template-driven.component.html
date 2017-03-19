@@ -1,12 +1,12 @@
 <h1>Template Driven</h1>
 <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-  <div>
+  <div ngModelGroup="userData">
     <div class="form-group">
       <label for="username">Username</label>
       <input type="text"
              class="form-control"
              id="username"
-             ngModal 
+             [(ngModel)] ="user.username" 
              name="username"
              required>
     </div>
@@ -15,10 +15,14 @@
       <input type="text"
              class="form-control"
              id="email"
-             ngModal 
+             [(ngModel)] ="user.email"  
              name="email"
              required
-             pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
+             pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+             #email="ngModel">
+             <div *ngIf="!email.valid">
+                Invalid Email
+             </div>
     </div>
   </div>
   <div class="form-group">
@@ -26,13 +30,15 @@
     <input type="password"
            class="form-control"
            id="password"
-           ngModal 
+           [(ngModel)] ="user.password"  
            name="password"
            required>
   </div>
-  <div class="radio">
+  <div class="radio" *ngFor="let g of genders">
     <label>
+      <input type="radio" name="gender" [(ngModel)]="user.gender" [value]="g">
+      {{g}}
     </label>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Submit</button>
 </form>
